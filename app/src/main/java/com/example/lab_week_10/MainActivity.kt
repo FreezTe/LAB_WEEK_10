@@ -26,11 +26,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareViewModel() {
-        // karena kita belum pakai LiveData, kita hanya update manual
-        updateText(viewModel.total)
+
+        // Observe LiveData
+        viewModel.total.observe(this) { total ->
+            updateText(total)
+        }
 
         findViewById<Button>(R.id.button_increment).setOnClickListener {
-            updateText(viewModel.incrementTotal())
+            viewModel.incrementTotal()
         }
     }
+
 }
